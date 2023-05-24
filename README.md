@@ -14,4 +14,4 @@ I am a student of SeoulTech. Dreaming of becoming a back-end developer 🧑‍�
 
 
 [![Solved.ac
-프로필](http://mazassumnida.wtf/api/generate_badge?boj={menten4859})](https://solved.ac/{menten4859})
+프로필](http://mazassumnida.wtf/api/generate_badge?boj=menten4859)](https://solved.ac/menten4859)
