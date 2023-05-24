@@ -1,3 +1,11 @@
-# Changha-dev.github.io
-# Welcome to StackEdit!
-Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
+👋 Hi, there! 🌴
+I am a student of SeoulTech. Dreaming of becoming a back-end developer 🧑‍💻
+
+🚀 I'm working hard to become a better day than yesterday ✨ 
+
+Skills
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
+<img src="https://img.shields.io/badge/JAVA-DD6620?style=for-the-badge&logo=JAVA&logoColor=white">
+<img src="https://img.shields.io/badge/SPRING-6DB33F?style=for-the-badge&logo=SPRING&logoColor=white">
+
+
