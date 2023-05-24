@@ -9,7 +9,7 @@ I am a student of SeoulTech. Dreaming of becoming a back-end developer 🧑‍�
 
 ### BLOG
 <a href="https://changha-dev.tistory.com/" target="_blank">
-<img src="https://img.shields.io/badge/TISTORY-000000?style=for-the-badge&logo=TISTORY&logoColor=white"></a>
+<img src="https://img.shields.io/badge/TISTORY-000000?style=for-the-badge&logo=TISTORY&logoColor=white"></a>      
 
 
 
