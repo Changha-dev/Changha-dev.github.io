@@ -70,15 +70,5 @@
 
 [[main]]
 name = "Engineering"
-pageRef = "/categories/engineering"
+pageRef = "/posts"
 weight = 10
-
-[[main]]
-name = "Design"
-pageRef = "/categories/design"
-weight = 20
-
-[[main]]
-name = "Product"
-pageRef = "/categories/product"
-weight = 30
