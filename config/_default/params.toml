@@ -183,7 +183,7 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
   # adsense = ""
 
 [utterances]
-  repo = "Changha-dev/changha-dev.github.io"
+  repo = "Changha-dev/Changha-dev.github.io"
   issueTerm = "pathname"
   label = "comment"
   theme = "preferred-color-scheme"
