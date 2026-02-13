@@ -86,18 +86,18 @@ main#main-content article.article-link--simple .post-list-media {
 }
 
 main#main-content article.article-link--simple .post-list-thumb-frame {
-  border: 1px solid #d6deea;
-  border-radius: 1.55rem;
+  border: 1px solid rgba(214, 222, 234, 0.6);
+  border-radius: 1rem;
   background: #f9fbff;
   box-shadow: none;
 }
 
 main#main-content article.article-link--simple .post-list-thumb-image {
-  border-radius: 1.45rem;
+  border-radius: inherit;
 }
 
 .dark main#main-content article.article-link--simple .post-list-thumb-frame {
-  border-color: #3f3f46;
+  border-color: rgba(63, 63, 70, 0.6);
   background: #1f2937;
   box-shadow: none;
 }
