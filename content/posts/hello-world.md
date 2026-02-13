@@ -4,6 +4,8 @@ date: 2026-02-13
 categories: ["engineering"]
 topics: ["기타"]
 tags: ["hugo", "blowfish"]
+description: "정렬과 본문 폭, 이미지 스타일을 점검하기 위한 첫 테스트 게시글입니다."
+featureimage: "/images/toss-border-test.svg"
 draft: false
 ---
 첫 글입니다. 이 문서는 상세 페이지의 실제 본문 폭과 좌우 여백이 어떻게 보이는지 확인하기 위해 작성한 테스트용 긴 텍스트입니다. 화면 크기가 바뀔 때 문단이 어떤 지점에서 줄바꿈되는지, 제목과 본문 블록이 같은 중심축을 유지하는지, 그리고 모바일 환경에서도 답답하지 않게 읽히는지를 확인하는 목적이 있습니다.
