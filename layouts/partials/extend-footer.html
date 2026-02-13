@@ -1,5 +1,6 @@
 <script>
   (function () {
+    const presetTopics = ["나르지지", "탐구"];
     const articles = Array.from(document.querySelectorAll("main#main-content article.article-link--simple"));
     if (!articles.length) return;
 
@@ -24,18 +25,24 @@
       for (const pair of pairs) {
         if (!pair?.slug || !pair?.name) continue;
         normalized.push({ slug: pair.slug, name: pair.name });
-        if (!topicMap.has(pair.slug)) {
-          topicMap.set(pair.slug, { name: pair.name, count: 0 });
+        if (!topicMap.has(pair.name)) {
+          topicMap.set(pair.name, { slug: pair.slug, count: 0 });
         }
       }
 
-      const dedupedSlugs = new Set(normalized.map((item) => item.slug));
-      for (const slug of dedupedSlugs) {
-        const info = topicMap.get(slug);
+      const dedupedNames = new Set(normalized.map((item) => item.name));
+      for (const name of dedupedNames) {
+        const info = topicMap.get(name);
         info.count += 1;
       }
 
-      articleMap.set(article, normalized);
+      articleMap.set(article, Array.from(dedupedNames));
+    }
+
+    for (const name of presetTopics) {
+      if (!topicMap.has(name)) {
+        topicMap.set(name, { slug: "", count: 0 });
+      }
     }
 
     if (!topicMap.size) return;
@@ -60,26 +67,27 @@
     const resetButton = panel.querySelector(".post-filter-reset");
 
     const topics = Array.from(topicMap.entries())
-      .map(([slug, info]) => ({ slug, name: info.name, count: info.count }))
+      .map(([name, info]) => ({ name, count: info.count }))
       .sort((a, b) => a.name.localeCompare(b.name, "ko"));
 
     for (const topic of topics) {
-      const id = "post-filter-" + topic.slug;
+      const id = "post-filter-" + topic.name.replace(/[^a-zA-Z0-9가-힣_-]/g, "-");
       const label = document.createElement("label");
       label.className = "post-filter-option";
       label.setAttribute("for", id);
-      label.innerHTML =
-        '<input type="checkbox" id="' +
-        id +
-        '" value="' +
-        topic.slug +
-        '">' +
-        '<span class="post-filter-name">' +
-        topic.name +
-        "</span>" +
-        '<span class="post-filter-count">(' +
-        topic.count +
-        ")</span>";
+
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.id = id;
+      input.value = topic.name;
+      input.setAttribute("data-topic-name", topic.name);
+
+      const name = document.createElement("span");
+      name.className = "post-filter-name";
+      name.textContent = topic.name;
+
+      label.appendChild(input);
+      label.appendChild(name);
       options.appendChild(label);
     }
 
@@ -129,12 +137,14 @@
       }
 
       const selected = new Set(
-        Array.from(panel.querySelectorAll('input[type="checkbox"]:checked')).map((input) => input.value)
+        Array.from(panel.querySelectorAll('input[type="checkbox"]:checked')).map(
+          (input) => input.getAttribute("data-topic-name") || input.value
+        )
       );
 
       let visibleCount = 0;
       for (const [article, categoriesForArticle] of articleMap.entries()) {
-        const visible = selected.size === 0 || categoriesForArticle.some((item) => selected.has(item.slug));
+        const visible = selected.size === 0 || categoriesForArticle.some((name) => selected.has(name));
         article.style.display = visible ? "" : "none";
         if (visible) visibleCount += 1;
       }
