@@ -1,15 +1,15 @@
 disabled = false
-languageCode = "en"
-languageName = "English"
+languageCode = "ko"
+languageName = "Korean"
 weight = 1
-title = "Blowfish"
+title = "짱아깨비 블로그"
 
 [params]
-  displayName = "EN"
-  isoCode = "en"
+  displayName = "KO"
+  isoCode = "ko"
   rtl = false
   dateFormat = "2006년 1월 2일"
-  # logo = "img/logo.png"
+  logo = "myprofile.png"
   # secondaryLogo = "img/secondary-logo.png"
   # description = "My awesome website"
   # copyright = "Copy, _right?_ :thinking_face:"
