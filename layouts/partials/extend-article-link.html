@@ -1,0 +1,18 @@
+{{ $topics := .Params.topics | default (slice) }}
+{{ if eq (len $topics) 0 }}
+  {{ $fallback := slice }}
+  {{ range $category := (.Params.categories | default (slice)) }}
+    {{ if ne ($category | lower) "engineering" }}
+      {{ $fallback = $fallback | append $category }}
+    {{ end }}
+  {{ end }}
+  {{ $topics = $fallback }}
+{{ end }}
+
+{{ if gt (len $topics) 0 }}
+  {{ $pairs := slice }}
+  {{ range $topic := $topics }}
+    {{ $pairs = $pairs | append (dict "slug" ($topic | urlize) "name" $topic) }}
+  {{ end }}
+  <span class="post-filter-meta hidden" data-filter-pairs='{{ $pairs | jsonify }}' aria-hidden="true"></span>
+{{ end }}

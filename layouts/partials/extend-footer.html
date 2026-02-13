@@ -1,0 +1,156 @@
+<script>
+  (function () {
+    const articles = Array.from(document.querySelectorAll("main#main-content article.article-link--simple"));
+    if (!articles.length) return;
+
+    const topicMap = new Map();
+    const articleMap = new Map();
+
+    for (const article of articles) {
+      const meta = article.querySelector(".post-filter-meta");
+      if (!meta?.dataset?.filterPairs) {
+        articleMap.set(article, []);
+        continue;
+      }
+
+      let pairs = [];
+      try {
+        pairs = JSON.parse(meta.dataset.filterPairs);
+      } catch (e) {
+        pairs = [];
+      }
+
+      const normalized = [];
+      for (const pair of pairs) {
+        if (!pair?.slug || !pair?.name) continue;
+        normalized.push({ slug: pair.slug, name: pair.name });
+        if (!topicMap.has(pair.slug)) {
+          topicMap.set(pair.slug, { name: pair.name, count: 0 });
+        }
+      }
+
+      const dedupedSlugs = new Set(normalized.map((item) => item.slug));
+      for (const slug of dedupedSlugs) {
+        const info = topicMap.get(slug);
+        info.count += 1;
+      }
+
+      articleMap.set(article, normalized);
+    }
+
+    if (!topicMap.size) return;
+
+    const main = document.querySelector("main#main-content");
+    const listSection = articles[0].closest("section");
+    if (!main || !listSection) return;
+    if (!/\/posts(\/|$)/.test(window.location.pathname)) return;
+    if (main.querySelector(".post-filter-layout")) return;
+
+    const panel = document.createElement("section");
+    panel.className = "post-filter-panel";
+    panel.innerHTML = [
+      '<div class="post-filter-head">',
+      '<strong>세부 카테고리</strong>',
+      '<button type="button" class="post-filter-reset">초기화</button>',
+      "</div>",
+      '<div class="post-filter-options"></div>',
+    ].join("");
+
+    const options = panel.querySelector(".post-filter-options");
+    const resetButton = panel.querySelector(".post-filter-reset");
+
+    const topics = Array.from(topicMap.entries())
+      .map(([slug, info]) => ({ slug, name: info.name, count: info.count }))
+      .sort((a, b) => a.name.localeCompare(b.name, "ko"));
+
+    for (const topic of topics) {
+      const id = "post-filter-" + topic.slug;
+      const label = document.createElement("label");
+      label.className = "post-filter-option";
+      label.setAttribute("for", id);
+      label.innerHTML =
+        '<input type="checkbox" id="' +
+        id +
+        '" value="' +
+        topic.slug +
+        '">' +
+        '<span class="post-filter-name">' +
+        topic.name +
+        "</span>" +
+        '<span class="post-filter-count">(' +
+        topic.count +
+        ")</span>";
+      options.appendChild(label);
+    }
+
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "post-filter-empty";
+    emptyMessage.textContent = "선택한 세부 카테고리에 해당하는 게시글이 없습니다.";
+    emptyMessage.hidden = true;
+
+    const layout = document.createElement("div");
+    layout.className = "post-filter-layout";
+
+    const listColumn = document.createElement("div");
+    listColumn.className = "post-filter-list-column";
+
+    const sideColumn = document.createElement("aside");
+    sideColumn.className = "post-filter-sidebar";
+
+    listSection.parentNode.insertBefore(layout, listSection);
+    layout.appendChild(listColumn);
+    layout.appendChild(sideColumn);
+    listColumn.appendChild(listSection);
+    listColumn.appendChild(emptyMessage);
+    sideColumn.appendChild(panel);
+
+    const yearHeadings = Array.from(listSection.querySelectorAll(":scope > h2"));
+
+    const updateYearVisibility = function () {
+      if (!yearHeadings.length) return;
+      for (const heading of yearHeadings) {
+        let hasVisible = false;
+        let current = heading.nextElementSibling;
+        while (current && current.tagName !== "H2") {
+          if (current.matches("article.article-link--simple") && current.style.display !== "none") {
+            hasVisible = true;
+            break;
+          }
+          current = current.nextElementSibling;
+        }
+        heading.style.display = hasVisible ? "" : "none";
+      }
+    };
+
+    const applyFilter = function () {
+      for (const checkbox of panel.querySelectorAll('input[type="checkbox"]')) {
+        const label = checkbox.closest(".post-filter-option");
+        if (label) label.classList.toggle("is-checked", checkbox.checked);
+      }
+
+      const selected = new Set(
+        Array.from(panel.querySelectorAll('input[type="checkbox"]:checked')).map((input) => input.value)
+      );
+
+      let visibleCount = 0;
+      for (const [article, categoriesForArticle] of articleMap.entries()) {
+        const visible = selected.size === 0 || categoriesForArticle.some((item) => selected.has(item.slug));
+        article.style.display = visible ? "" : "none";
+        if (visible) visibleCount += 1;
+      }
+
+      updateYearVisibility();
+      emptyMessage.hidden = visibleCount > 0;
+    };
+
+    panel.addEventListener("change", applyFilter);
+    resetButton?.addEventListener("click", function () {
+      for (const checkbox of panel.querySelectorAll('input[type="checkbox"]')) {
+        checkbox.checked = false;
+      }
+      applyFilter();
+    });
+
+    applyFilter();
+  })();
+</script>
