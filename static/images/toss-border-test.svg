@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="60" x2="1080" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#EEF2FF"/>
+    </linearGradient>
+    <linearGradient id="card" x1="300" y1="220" x2="880" y2="610" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" rx="28" fill="url(#bg)"/>
+  <rect x="220" y="130" width="760" height="500" rx="26" fill="url(#card)" stroke="#E4E4E7" stroke-width="2"/>
+  <rect x="290" y="208" width="300" height="26" rx="13" fill="#E2E8F0"/>
+  <rect x="290" y="252" width="620" height="18" rx="9" fill="#E2E8F0"/>
+  <rect x="290" y="285" width="560" height="18" rx="9" fill="#E2E8F0"/>
+  <rect x="290" y="318" width="420" height="18" rx="9" fill="#E2E8F0"/>
+  <rect x="290" y="380" width="620" height="150" rx="18" fill="#FFFFFF" stroke="#D4D4D8" stroke-width="2"/>
+  <rect x="328" y="418" width="180" height="74" rx="12" fill="#DBEAFE"/>
+  <rect x="530" y="426" width="340" height="16" rx="8" fill="#E2E8F0"/>
+  <rect x="530" y="454" width="280" height="16" rx="8" fill="#E2E8F0"/>
+  <rect x="530" y="482" width="220" height="16" rx="8" fill="#E2E8F0"/>
+  <text x="600" y="678" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#334155">
+    Image Border Test
+  </text>
+</svg>

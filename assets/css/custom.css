@@ -18,6 +18,40 @@
   max-width: 100%;
 }
 
+/* Toss-like image card style for post detail content */
+#main-content article .article-content img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 1.2rem 0;
+  padding: 0.5rem;
+  border: 1px solid #e4e4e7;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+}
+
+#main-content article .article-content figure {
+  margin: 1.4rem 0;
+}
+
+#main-content article .article-content figcaption {
+  margin-top: 0.55rem;
+  text-align: center;
+  font-size: 0.84rem;
+  color: #71717a;
+}
+
+.dark #main-content article .article-content img {
+  border-color: #3f3f46;
+  background: #18181b;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+.dark #main-content article .article-content figcaption {
+  color: #a1a1aa;
+}
+
 main#main-content .post-filter-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 280px;
