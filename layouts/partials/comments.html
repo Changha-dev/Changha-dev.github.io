@@ -1,0 +1,16 @@
+{{ with site.Params.utterances }}
+  {{ if .repo }}
+    <script
+      src="https://utteranc.es/client.js"
+      repo="{{ .repo }}"
+      issue-term="{{ .issueTerm | default "pathname" }}"
+      label="{{ .label | default "comment" }}"
+      theme="{{ .theme | default "preferred-color-scheme" }}"
+      crossorigin="anonymous"
+      async></script>
+  {{ else }}
+    {{ warnf "[COMMENTS] utterances.repo is not configured. Set [utterances].repo in config/_default/params.toml." }}
+  {{ end }}
+{{ else }}
+  {{ warnf "[COMMENTS] utterances config is missing. Add [utterances] to config/_default/params.toml." }}
+{{ end }}
