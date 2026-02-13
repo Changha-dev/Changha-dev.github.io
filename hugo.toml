@@ -1,0 +1,3 @@
+baseURL = 'https://changha-dev.github.io/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
