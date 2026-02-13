@@ -1,14 +1,14 @@
 /* Blowfish single page: header/body/footer aligned to the same centered column. */
 #main-content article > #single_header,
 #main-content article > footer {
-  width: min(100%, 760px);
+  width: min(100%, 700px);
   margin-left: auto;
   margin-right: auto;
 }
 
 /* The single template wraps content with `max-w-fit`, which can keep short posts left-aligned. */
 #main-content article > section > .min-w-0.min-h-0.max-w-fit {
-  width: min(100%, 760px);
+  width: min(100%, 700px);
   max-width: none;
   margin-left: auto;
   margin-right: auto;
@@ -16,6 +16,7 @@
 
 #main-content article .article-content {
   max-width: 100%;
+  font-size: 17px;
 }
 
 /* Header logo sizing: keep it close to text height and render as a circle */
