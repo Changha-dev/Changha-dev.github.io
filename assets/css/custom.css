@@ -173,6 +173,17 @@ main#main-content article.article-link--simple .post-list-content > .text-sm {
   color: #9ca3af;
 }
 
+main#main-content > section.prose > .max-w-prose > p {
+  font-size: clamp(1.12rem, 1.02rem + 0.35vw, 1.3rem);
+  line-height: 1.72;
+  color: #6b7684;
+}
+
+main#main-content > header > h1 {
+  margin-top: 4.0rem;
+  color: #333d4b;
+}
+
 main#main-content .post-filter-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 280px;
@@ -359,6 +370,15 @@ main#main-content .post-filter-empty {
 
   main#main-content article.article-link--simple .post-list-content > .text-sm {
     font-size: 0.82rem;
+  }
+
+  main#main-content > section.prose > .max-w-prose > p {
+    font-size: clamp(1.02rem, 0.96rem + 0.8vw, 1.14rem);
+    line-height: 1.68;
+  }
+
+  main#main-content > header > h1 {
+    margin-top: 1.65rem;
   }
 
   main#main-content .post-filter-layout {
