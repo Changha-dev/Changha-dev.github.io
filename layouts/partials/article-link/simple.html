@@ -86,8 +86,9 @@
 {{ end }}
 
 {{ $desc := (.Description | default (.Summary | plainify)) | plainify }}
+{{ $hasFeatured := gt (len $featuredURL) 0 }}
 
-<article class="article-link--simple post-list-item {{ $cardClasses }}">
+<article class="article-link--simple post-list-item {{ $cardClasses }}{{ if not $hasFeatured }} post-list-no-thumb{{ end }}">
   {{ with $featuredURL }}
     <div class="post-list-media flex-none relative overflow-hidden {{ $imgWrapperClasses }} thumbnail post-list-thumb-frame">
       <img
@@ -100,10 +101,13 @@
   {{ end }}
   <div class="post-list-content {{ $cardContentClasses }}">
     <header class="post-list-header items-center text-start text-xl font-semibold">
-      {{ if gt (len $topics) 0 }}
+      {{ if or (gt (len $topics) 0) (and .Draft .Site.Params.article.showDraftLabel) }}
         <div class="post-list-topics" aria-label="토픽">
           {{ range $topic := $topics }}
             <span class="post-list-topic">{{ $topic }}</span>
+          {{ end }}
+          {{ if and .Draft .Site.Params.article.showDraftLabel }}
+            <span class="post-list-topic post-list-topic-draft">{{ i18n "article.draft" | emojify }}</span>
           {{ end }}
         </div>
       {{ end }}
@@ -126,9 +130,6 @@
         </h2>
       </a>
 
-      {{ if and .Draft .Site.Params.article.showDraftLabel }}
-        <div class="ms-2">{{ partial "badge.html" (i18n "article.draft" | emojify) }}</div>
-      {{ end }}
       {{ if templates.Exists "partials/extend-article-link.html" }}
         {{ partial "extend-article-link.html" . }}
       {{ end }}
