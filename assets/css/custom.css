@@ -158,7 +158,7 @@ main#main-content .post-list-topic-draft {
 }
 
 main#main-content article.article-link--simple .post-list-title-link h2 {
-  font-size: clamp(1.65rem, 2.35vw, 1.6rem);
+  font-size: 20px;
   line-height: 1.22;
   letter-spacing: -0.02em;
 }
@@ -370,7 +370,7 @@ main#main-content .post-filter-empty {
   }
 
   main#main-content article.article-link--simple .post-list-title-link h2 {
-    font-size: clamp(1.28rem, 5.2vw, 1.7rem);
+    font-size: 20px;
     line-height: 1.3;
   }
 
