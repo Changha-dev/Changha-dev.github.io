@@ -407,5 +407,10 @@ _(wait_set은 set인 이유가 있나 했더니 자료구조로서의 차이는 
 ---
 
 여기까지 Synchronizer의 소스코드를 직접 분석해보면서 Lock 동작 과정을 알아보았습니다.  
-최대한 ObjectMonitor를 피하려는 코드 최적화가 있는 것이 흥미로웠습니다. (중간중간 혹시 모를 Spin연산 넣기, deflation인지 체크 ..)
+최대한 ObjectMonitor를 피하려는 코드 최적화가 있는 것이 흥미로웠습니다. (중간중간 혹시 모를 Spin연산 넣기, deflation인지 체크 ..)  
 그리고 JDK24버전과 JDK21버전을 비교하고 정말 Spinning관련 내용이 업데이트 되어있는 것을 두 눈으로 확인할 수 있었습니다. (점차 소스코드 보는 것에 대한 거부감이 사라지는 느낌..?)
+
+---
+참고 링크  
+- [[JAVA] synchronized는 어떻게 Lock을 거는가?](https://velog.io/@aplbly/JAVA-%EB%B0%94%EC%9D%B4%ED%8A%B8%EC%BD%94%EB%93%9C)
+- [JDK24 Github](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/runtime/objectMonitor.cpp#L940)
