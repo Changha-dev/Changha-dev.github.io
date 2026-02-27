@@ -1,16 +1,23 @@
-{{ with site.Params.utterances }}
-  {{ if .repo }}
-    <script
-      src="https://utteranc.es/client.js"
-      repo="{{ .repo }}"
-      issue-term="{{ .issueTerm | default "pathname" }}"
-      label="{{ .label | default "comment" }}"
-      theme="{{ .theme | default "preferred-color-scheme" }}"
-      crossorigin="anonymous"
-      async></script>
-  {{ else }}
-    {{ warnf "[COMMENTS] utterances.repo is not configured. Set [utterances].repo in config/_default/params.toml." }}
-  {{ end }}
+{{ $cfg := site.Params.utterances }}
+{{ $repo := .Params.utterancesRepo | default ($cfg.repo | default "") }}
+{{ $issueTerm := .Params.utterancesIssueTerm | default ($cfg.issueTerm | default "pathname") }}
+{{ $issueNumber := .Params.utterancesIssueNumber }}
+{{ $label := .Params.utterancesLabel | default ($cfg.label | default "comment") }}
+{{ $theme := .Params.utterancesTheme | default ($cfg.theme | default "preferred-color-scheme") }}
+
+{{ if $repo }}
+  <script
+    src="https://utteranc.es/client.js"
+    repo="{{ $repo }}"
+    {{ if $issueNumber }}
+      issue-number="{{ $issueNumber }}"
+    {{ else }}
+      issue-term="{{ $issueTerm }}"
+    {{ end }}
+    label="{{ $label }}"
+    theme="{{ $theme }}"
+    crossorigin="anonymous"
+    async></script>
 {{ else }}
-  {{ warnf "[COMMENTS] utterances config is missing. Add [utterances] to config/_default/params.toml." }}
+  {{ warnf "[COMMENTS] utterances.repo is not configured. Set [utterances].repo in config/_default/params.toml or utterancesRepo in front matter." }}
 {{ end }}
