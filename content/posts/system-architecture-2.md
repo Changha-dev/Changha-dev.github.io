@@ -5,7 +5,7 @@ categories: ["engineering"]
 topics: ["탐구"]
 description: "가상면접 시스템 설계2 - 2장을 읽고나서 더 탐구하고 싶은 내용을 작성하였습니다."
 utterancesRepo: "system-design-case-study/issue-collection"
-utterancesIssueTerm: "system-architecture-2-comments"
+utterancesIssueNumber: 5
 draft: false
 ---
 
