@@ -5,7 +5,7 @@ categories: ["engineering"]
 topics: ["나르지지", "탐구"]
 description: "스케줄링을 통한 배치 API콜을 분산환경에서는 어떻게 관리해야 될 지 알아보는 글입니다."
 featureimage: "../distribute-batch-architecture-img/img7.png"
-draft: true
+draft: false
 ---
 현재 나르지지 서비스는 스케줄링을 통한 배치 API 요청을 주기적으로 하고 있습니다.(6시간 단위)  
 현재는 단일 서버라서 괜찮지만 만약 멀티 인스턴스 구조로 서비스 운영을 한다면 다중 스케줄링이 작동하게 될 것 입니다.  
