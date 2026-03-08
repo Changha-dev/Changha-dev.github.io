@@ -1,5 +1,5 @@
 ---
-title: "분산환경에서의 배치 아키텍처 설계 및 비교"
+title: "분산환경에서의 배치 스케줄링 아키텍처 설계 및 비교"
 date: 2026-03-07
 categories: ["engineering"]
 topics: ["나르지지", "탐구"]
