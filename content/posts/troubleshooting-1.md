@@ -4,8 +4,8 @@ date: 2026-03-11
 categories: ["engineering"]
 topics: ["나르지지"]
 description: "스케줄링을 통한 배치 API콜을 분산환경에서는 어떻게 관리해야 될 지 알아보는 글입니다."
-featureimage: "../distribute-batch-architecture-img/img7.png"
-draft: true
+featureimage: "../troubleshooting-1-img/img2.png"
+draft: false
 ---
 3월 2일에 AWS 정산 내역을 이메일로 받았습니다.  
 평소라면 기본 요금인 2만 5천원정도가 떠야 되는데...
