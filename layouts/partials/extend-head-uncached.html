@@ -1,0 +1,8 @@
+{{ if and .IsPage (not (.Params.hideFeatureImage | default false)) }}
+  {{ $feature := partial "helpers/featured-image.html" (dict "page" . "resize" "1200x") }}
+  {{ with $feature.url }}
+    <meta property="og:image" content="{{ . | absURL }}">
+    <meta name="twitter:image" content="{{ . | absURL }}">
+    <meta name="twitter:card" content="summary_large_image">
+  {{ end }}
+{{ end }}
