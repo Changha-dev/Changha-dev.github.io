@@ -1,0 +1,63 @@
+{{ $page := .page }}
+{{ $patterns := .patterns | default (slice "*feature*" "*cover*" "*thumbnail*") }}
+{{ $defaultStoreKey := .defaultStoreKey | default "defaultFeaturedImage" }}
+{{ $resize := .resize | default "" }}
+{{ $disableImageOptimization := site.Store.Get "disableImageOptimization" }}
+
+{{ $featured := "" }}
+{{ $featuredURL := "" }}
+
+{{ with $page }}
+  {{ with .Params.featureimage }}
+    {{ if strings.HasPrefix . "/" }}
+      {{ $featuredURL = . | relURL }}
+    {{ else if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
+      {{ if site.Params.hotlinkFeatureImage }}
+        {{ $featuredURL = . }}
+      {{ else }}
+        {{ $featured = resources.GetRemote . }}
+      {{ end }}
+    {{ else }}
+      {{ with $page.Resources.GetMatch . }}
+        {{ $featured = . }}
+      {{ end }}
+      {{ if not $featured }}
+        {{ with resources.Get . }}
+          {{ $featured = . }}
+        {{ end }}
+      {{ end }}
+      {{ if not $featured }}
+        {{ $featuredURL = urls.JoinPath $page.RelPermalink . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ if not (or $featured $featuredURL) }}
+    {{ $images := .Resources.ByType "image" }}
+    {{ range $patterns }}
+      {{ if not $featured }}
+        {{ $featured = $images.GetMatch . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ if not (or $featured $featuredURL) }}
+    {{ $default := site.Store.Get $defaultStoreKey }}
+    {{ if $default.url }}
+      {{ $featuredURL = $default.url }}
+    {{ else if $default.obj }}
+      {{ $featured = $default.obj }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if not $featuredURL }}
+  {{ with $featured }}
+    {{ $featuredURL = .RelPermalink }}
+    {{ if and $resize (not (or $disableImageOptimization (eq .MediaType.SubType "svg"))) }}
+      {{ $featuredURL = (.Resize $resize).RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return (dict "resource" $featured "url" $featuredURL) }}
