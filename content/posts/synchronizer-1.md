@@ -1,9 +1,9 @@
 ---
-title: "Synchronizer의 Lock 원리 파헤치기"
+title: "Synchronized의 Lock 원리 파헤치기"
 date: 2026-02-19
 categories: ["engineering"]
 topics: ["탐구"]
-description: "Synchronizer의 Lock 원리를 자세히 살펴보고, 내부 동작 방식을 이해하는 글입니다."
+description: "Synchronized의 Lock 원리를 자세히 살펴보고, 내부 동작 방식을 이해하는 글입니다."
 draft: false
 ---
 
