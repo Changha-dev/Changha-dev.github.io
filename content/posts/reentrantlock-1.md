@@ -5,7 +5,7 @@ categories: ["engineering"]
 topics: ["탐구"]
 description: "Reentrantlock은 Synchronized와 달리 가상스레드 pinning 상황에서 자유로운 이유를 살펴봅니다."
 featureimage: "../reentrantlock-1-img/img2.png"
-draft: true
+draft: false
 ---
 이전 글 시리즈에서는 가상 스레드의 내부동작과 Synchronized의 소스코드를 살펴보면서 Lock 동작 시 pinning이 걸리는 이유를 살펴보았습니다.  
 [가상 스레드 소스코드 파헤쳐보기](https://changha-dev.github.io/posts/virtual-thread-1/)  
