@@ -180,6 +180,11 @@ protected final boolean tryAcquire(int acquires) {
 ```
 hasQueuedPredecessors()가 항상 같이 있는 것을 확인할 수 있습니다.
 
---- 
+NonFair방식이 즉시 락을 사용할 때 즉시 스레드가 사용되어 전환 비용이 감소한다는 장점이 있습니다. 
+반면 Fair방식은 대기 스레드를 실행 상태로 변경하는 오버헤드가 발생합니다.
+그렇다고 NonFair방식이 항상 좋은 건 아닙니다. 계속해서 새로운 스레드가 락을 가지게 된다면 기아상태에 빠질 수 있는 위험이 있습니다.
+
+---
+
 핵심은 ReentrantLock의 대기 과정이 Object Monitor 기반이 아니라, virtual thread를 인식하는 LockSupport.park() 경로 위에서 동작한다는 점입니다. 
 따라서 JDK 21~23 기준에서는 synchronized에서 문제가 되는 pinning 상황을 피하는 데 더 유리합니다.
