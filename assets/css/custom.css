@@ -30,17 +30,22 @@
   object-position: center;
 }
 
-/* Toss-like image card style for post detail content */
+/* Keep image framing/centering for all post images. */
 #main-content article .article-content img {
   display: block;
-  width: 100%;
   max-width: 100%;
-  margin: 1.2rem 0;
+  height: auto;
+  margin: 1.2rem auto;
   padding: 0.5rem;
   border: 1px solid #e4e4e7;
   border-radius: 1rem;
   background: #ffffff;
   box-shadow: none;
+}
+
+/* Unsized images should still expand to the content width. */
+#main-content article .article-content img:not([width]):not([height]) {
+  width: 100%;
 }
 
 #main-content article .article-content figure {
