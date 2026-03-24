@@ -1,13 +1,13 @@
-<article class="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center text-center">
-  {{ with .Title }}
-    <header class="w-full">
-      <h1 class="text-3xl font-extrabold">{{ . | emojify }}</h1>
-    </header>
-  {{ end }}
-  <section class="prose mt-6 w-full dark:prose-invert">{{ .Content }}</section>
-</article>
+<section class="mx-auto w-full max-w-5xl px-4 pt-8 md:pt-14">
+  <article class="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-start text-center">
+    {{ with .Title }}
+      <header class="w-full">
+        <h1 class="text-3xl font-extrabold">{{ . | emojify }}</h1>
+      </header>
+    {{ end }}
+    <section class="prose mt-6 w-full dark:prose-invert">{{ .Content }}</section>
+  </article>
+</section>
 {{ if .Site.Params.homepage.showRecent }}
-  <section>
-    {{ partial "recent-articles/main.html" . }}
-  </section>
+  {{ partial "home/recent-posts.html" . }}
 {{ end }}
