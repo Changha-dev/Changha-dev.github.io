@@ -4,7 +4,7 @@ date: 2026-03-23
 categories: ["engineering"]
 topics: ["탐구"]
 description: "NameLock을 사용하면서 조심해야 될 포인트들을 탐구하는 글입니다."
-featureimage: "../reentrantlock-1-img/img2.png"
+featureimage: "../namedlock-1-img/img3.png"
 draft: false
 ---
 여러 락 기법 중에 DB락 중 하나인 네임드 락이 있습니다. 네임드 락은 특정 문자열에 락을 거는 방식으로 동작합니다.  
