@@ -45,7 +45,7 @@ SELECT RELEASE_LOCK('lock1');
 이어서 @Transactional과 함께 사용하는 방식에 대해 살펴보겠습니다. 
 
 # 2. @Transactional 과 NamedLock을 함께 사용한다면
-@Transactional과 사용할 때 내부에서 락을 관리하는 것과 밖에서 잡는 것의 차이점이 있습니다. 
+@Transactional과 사용할 때 내부에서 락을 사용하는 것과 밖에서 사용하는 것의 차이점이 있습니다. 
 먼저 @Transactional 내부에서 사용하는 방식을 확인해보겠습니다.
 ## @Transactional 내부에 NamedLock 사용
 @Transactional 내부에서 NamedLock을 사용할 때는 락 커넥션과 비즈니스 커넥션이 모두 동일합니다.  
