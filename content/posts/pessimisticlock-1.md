@@ -158,8 +158,8 @@ Error Code: 1062. Duplicate entry '1-100' for key 'user_coupon.uq_user_coupon_is
 
 실행계획을 확인한 결과 EXPLAIN, EXPLAIN ANALYZE 모두 여전히 used_key_parts를 room_id, start_at까지만 사용하고 있었고, 
 놀라웠던 점이 추정 반환은 49913건, 실제 반환은 44건 이었습니다. 옵티마이저를 이용한 추정치는 생각보다 정확하지 않다는 것을 확인하였습니다. 
-왜 대략 추정 반환이 5만 건일까 하고 데이터를 새로 2만 건을 하고 EXPLAIN 해봤습니다. 이번에는 1만 건 추정 반환이 나왔습니다. 다르게 해도 1/2로 계속 나왔습니다. 
-
+왜 대략 추정 반환이 5만 건일까 하고 데이터를 새로 2만 건을 하고 EXPLAIN 해봤습니다. 이번에는 1만 건 추정 반환이 나왔습니다. 다르게 해도 1/2로 계속 나왔습니다.  
+_이 부분은 정확한 원인을 아직은 모르겠어서 더 공부해보겠습니다._
 
 정확히 락 걸린 것을 확인하기 위해 performance_schema.data_locks를 직접 확인해보았습니다.
 그 결과 ix_room_start_end 인덱스에서 room_id = 1이고 start_at < 10:30에 해당하는 범위 전반에 걸쳐 record lock이 관찰되었고, 여러 leaf page의 끝을 의미하는 supremum pseudo-record도 함께 확인할 수 있었습니다.
