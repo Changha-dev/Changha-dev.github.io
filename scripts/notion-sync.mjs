@@ -206,7 +206,9 @@ function filterPagesForSync(pages, currentConfig) {
 async function syncPage({ page, dataSource, managedPosts, config: currentConfig }) {
   const titlePropertyName = pickTitlePropertyName(dataSource, currentConfig.titleProperty);
   const title = getPropertyString(page.properties?.[titlePropertyName]) || "Untitled";
-  const slugSource = getPropertyString(page.properties?.[currentConfig.slugProperty]) || title;
+  const existingForPage = managedPosts.byPageId.get(page.id);
+  const explicitSlugSource = getPropertyString(page.properties?.[currentConfig.slugProperty]);
+  const slugSource = explicitSlugSource || existingForPage?.slug || title;
   const slug = slugify(slugSource) || page.id.replace(/-/g, "");
   const outputPath = path.join(currentConfig.outputDir, `${slug}.md`);
   const assetDir = path.join(currentConfig.outputDir, `${slug}-img`);
