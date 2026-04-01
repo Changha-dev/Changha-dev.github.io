@@ -1,9 +1,9 @@
 ---
-title: "Elastic Search"
+title: "검색 기능에 Elastic Search 활용 내용"
 date: 2026-03-31
 categories: ["engineering"]
 topics: ["나르지지"]
-description: "Elastic Search를 도입한 배경에 대해 살펴보는 글입니다."
+description: "나르지지 홈페이지 검색 기능에 Elastic Search를 활용하여 구현한 과정을 담은 글입니다."
 featureimage: "../elastic-search-img/cover.png"
 draft: false
 notion_page_id: "334fa155-30f7-80f2-a16d-fc06938f20f7"
