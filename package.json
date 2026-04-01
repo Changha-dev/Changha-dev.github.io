@@ -1,0 +1,7 @@
+{
+  "name": "myblog",
+  "private": true,
+  "scripts": {
+    "notion:sync": "node scripts/notion-sync.mjs"
+  }
+}

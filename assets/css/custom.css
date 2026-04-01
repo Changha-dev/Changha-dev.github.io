@@ -19,6 +19,31 @@
   font-size: 17px;
 }
 
+#main-content article .article-content p {
+  margin-top: 0.95rem;
+  margin-bottom: 0.95rem;
+}
+
+#main-content article .article-content p + p {
+  margin-top: 0.95rem;
+}
+
+#main-content article .article-content ul,
+#main-content article .article-content ol {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+#main-content article .article-content li + li {
+  margin-top: 0.2rem;
+}
+
+#main-content article .article-content li > ul,
+#main-content article .article-content li > ol {
+  margin-top: 0.2rem;
+  margin-bottom: 0.1rem;
+}
+
 /* Header logo sizing: keep it close to text height and render as a circle */
 .main-menu img.logo {
   width: 2rem;

@@ -1,0 +1,6 @@
+.env
+.hugo_build.lock
+.idea/
+.notion-sync/
+node_modules/
+public/
