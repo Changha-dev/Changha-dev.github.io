@@ -5,7 +5,7 @@ categories: ["engineering"]
 topics: ["나르지지"]
 description: "나르지지 홈페이지 검색 기능에 Elasticsearch를 활용하여 구현한 과정을 담은 글입니다."
 featureimage: "../elastic-search-img/cover.png"
-draft: false
+draft: true
 notion_page_id: "334fa155-30f7-80f2-a16d-fc06938f20f7"
 ---
 # 들어가며

@@ -194,7 +194,9 @@ function filterPagesForSync(pages, currentConfig) {
   }
 
   return pages.filter((page) => {
-    const statusValue = getPropertyString(page.properties?.[currentConfig.statusProperty]);
+    const statusValue = getPropertyString(
+      getConfiguredProperty(page.properties, currentConfig.statusProperty),
+    );
     if (!statusValue) {
       return false;
     }
@@ -205,9 +207,12 @@ function filterPagesForSync(pages, currentConfig) {
 
 async function syncPage({ page, dataSource, managedPosts, config: currentConfig }) {
   const titlePropertyName = pickTitlePropertyName(dataSource, currentConfig.titleProperty);
-  const title = getPropertyString(page.properties?.[titlePropertyName]) || "Untitled";
+  const title =
+    getPropertyString(getConfiguredProperty(page.properties, titlePropertyName)) || "Untitled";
   const existingForPage = managedPosts.byPageId.get(page.id);
-  const explicitSlugSource = getPropertyString(page.properties?.[currentConfig.slugProperty]);
+  const explicitSlugSource = getPropertyString(
+    getConfiguredProperty(page.properties, currentConfig.slugProperty),
+  );
   const slugSource = explicitSlugSource || existingForPage?.slug || title;
   const slug = slugify(slugSource) || page.id.replace(/-/g, "");
   const outputPath = path.join(currentConfig.outputDir, `${slug}.md`);
@@ -230,14 +235,24 @@ async function syncPage({ page, dataSource, managedPosts, config: currentConfig 
 
   const blocks = await fetchBlockChildren(page.id);
   const body = (await renderBlocks(blocks, ctx)).trim();
-  const description = getPropertyString(page.properties?.[currentConfig.descriptionProperty]);
-  const propertyCategories = getPropertyStringArray(page.properties?.[currentConfig.categoriesProperty]);
-  const propertyTopics = getPropertyStringArray(page.properties?.[currentConfig.topicsProperty]);
+  const description = getPropertyString(
+    getConfiguredProperty(page.properties, currentConfig.descriptionProperty),
+  );
+  const propertyCategories = getPropertyStringArray(
+    getConfiguredProperty(page.properties, currentConfig.categoriesProperty),
+  );
+  const propertyTopics = getPropertyStringArray(
+    getConfiguredProperty(page.properties, currentConfig.topicsProperty),
+  );
   const categories = propertyCategories.length > 0 ? propertyCategories : currentConfig.defaultCategories;
   const topics = propertyTopics.length > 0 ? propertyTopics : currentConfig.defaultTopics;
-  const tags = getPropertyStringArray(page.properties?.[currentConfig.tagsProperty]);
-  const statusValue = getPropertyString(page.properties?.[currentConfig.statusProperty]);
-  const draftValue = getPropertyBoolean(page.properties?.[currentConfig.draftProperty]);
+  const tags = getPropertyStringArray(getConfiguredProperty(page.properties, currentConfig.tagsProperty));
+  const statusValue = getPropertyString(
+    getConfiguredProperty(page.properties, currentConfig.statusProperty),
+  );
+  const draftValue = getPropertyBoolean(
+    getConfiguredProperty(page.properties, currentConfig.draftProperty),
+  );
   const draft = Boolean(
     draftValue != null
       ? draftValue
@@ -247,7 +262,7 @@ async function syncPage({ page, dataSource, managedPosts, config: currentConfig 
   );
 
   const date =
-    getPropertyDate(page.properties?.[currentConfig.dateProperty]) ||
+    getPropertyDate(getConfiguredProperty(page.properties, currentConfig.dateProperty)) ||
     formatDate(page.created_time) ||
     formatDate(page.last_edited_time);
 
@@ -730,6 +745,25 @@ function getPropertyString(property) {
     default:
       return "";
   }
+}
+
+function getConfiguredProperty(properties, configuredName) {
+  if (!properties || !configuredName) {
+    return null;
+  }
+
+  if (configuredName in properties) {
+    return properties[configuredName];
+  }
+
+  const normalizedName = configuredName.trim().toLowerCase();
+  for (const [name, property] of Object.entries(properties)) {
+    if (name.trim().toLowerCase() === normalizedName) {
+      return property;
+    }
+  }
+
+  return null;
 }
 
 function getPropertyStringArray(property) {
